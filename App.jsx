@@ -3,6 +3,7 @@ import {
   Activity, ArrowRight, BrainCircuit, CheckCircle2, ChevronRight,
   CircleUserRound, Gauge, LogOut, Plus, Sparkles, Target, TrendingUp
 } from 'lucide-react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import { supabase } from './supabase'
 
 const demo = {
@@ -131,8 +132,8 @@ export default function App() {
     stage: diagnostic?.evolution_stage ?? demo.stage,
   }),[diagnostic])
 
-  if (loading) return <div className="loading">Loading intelligence…</div>
-  if (!session) return <Login/>
+  if (loading) return <><div className="loading">Loading intelligence…</div><SpeedInsights /></>
+  if (!session) return <><Login/><SpeedInsights /></>
 
   const firstName = profile?.first_name || session.user.email?.split('@')[0] || 'Executive'
   const active = priorities.filter(x=>x.status==='active')
@@ -208,5 +209,6 @@ export default function App() {
         </article>
       </section>
     </main>
+    <SpeedInsights />
   </div>
 }
