@@ -6,7 +6,7 @@ import {
   Target, Trash2, TrendingUp, Users, X
 } from 'lucide-react'
 import { supabase } from "./services/supabase";
-
+import ExecutiveSidebar from "./components/layout/ExecutiveSidebar";
 const demo = { capacity: 81, dna: 'Architect', constraint: 'Leadership Multiplication', stage: 'Systemizing' }
 const emptyMemory = {
   mission: '', vision: '', core_values: [], leadership_philosophy: '',
@@ -203,18 +203,15 @@ export default function App() {
   const decisionItems = decisions.length ? decisions : [{ id: 'q1', title: 'Choose what to delegate this week', impact: 'high', urgency: 'high' }, { id: 'q2', title: 'Protect tomorrow’s strategy block', impact: 'medium', urgency: 'normal' }]
   const memoryProgress = Math.round(([memory.mission, memory.vision, memory.leadership_style, memory.annual_goal, memory.quarterly_focus, memory.definition_of_success].filter(Boolean).length / 6) * 100)
 
-  const nav = <aside className={mobileNav ? 'open' : ''}>
-    <div className="brand"><span>AE</span><div>AI EXECUTIVE<small>INTELLIGENCE PLATFORM</small></div></div>
-    <button className="close-nav" onClick={() => setMobileNav(false)}><X/></button>
-    <nav>
-      <button className={activeView === 'command' ? 'active' : ''} onClick={() => changeView('command')}><Gauge/> Command Center</button>
-      <button><BrainCircuit/> Intelligence</button><button><Target/> Priorities</button><button><CalendarDays/> Calendar</button>
-      <button><MessageSquareText/> Chief of Staff</button>
-      <button className={activeView === 'memory' ? 'active' : ''} onClick={() => changeView('memory')}><BookOpen/> Executive Memory</button>
-      <button><CircleUserRound/> Profile</button>
-    </nav>
-    <div className="sidebar-footer"><div className="live-status"><span/> Intelligence active</div><button className="signout" onClick={() => supabase.auth.signOut()}><LogOut size={17}/> Sign out</button></div>
-  </aside>
+  const nav = (
+  <ExecutiveSidebar
+    activeView={activeView}
+    mobileNav={mobileNav}
+    onChangeView={changeView}
+    onCloseMobileNav={() => setMobileNav(false)}
+    onSignOut={() => supabase.auth.signOut()}
+  />
+);
 
   if (activeView === 'memory') return <div className="app-shell">{nav}<main>
     <button className="menu-button" onClick={() => setMobileNav(true)}><Menu/></button>
