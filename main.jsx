@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 import App from "./App-executive-memory";
 import "./styles-executive-memory.css";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode><App /></React.StrictMode>
-)
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
