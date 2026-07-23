@@ -5,7 +5,7 @@ import {
   LogOut, Menu, MessageSquareText, Plus, Save, ShieldAlert, Sparkles,
   Target, Trash2, TrendingUp, Users, X
 } from 'lucide-react'
-import { supabase } from './supabase'
+import { supabase } from "./services/supabase";
 
 const demo = { capacity: 81, dna: 'Architect', constraint: 'Leadership Multiplication', stage: 'Systemizing' }
 const emptyMemory = {
